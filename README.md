@@ -27,6 +27,5 @@ QRDoge is currently limited to max qrcode size of ~3k and limited even more so o
 * * When a `new wallet` is created. 
   * When the `Refresh Balance` button is pressed.
   * Towards the end of the `Send` button's flow.
-* `When QRDoge displays a QR Code itself`, press 'next' on DogecoinTerminal and provide the qr code to DogecoinTerminal.
 
 
