@@ -47,15 +47,36 @@ public partial class ScanQRPage : ContentPage
 							{
 								var client = new DogecoinRpcClient(url, user, pass);
 								var responseString = client.AddAddressToWatch(parts[2], "qrdoge");
-								await DisplayAlert("Node Response", responseString, "OK");
-								await Navigation.PopAsync();
+
+
+								if (responseString.StartsWith("ERROR"))
+								{
+									await DisplayAlert("Error Registering with Node", "Select 'Cancel' in DogecoinTerminal.Error:\n" + responseString, "Ok, I selected Cancel");
+									await Navigation.PopAsync();
+								}
+								else
+								{
+									try
+									{
+										var response = JsonNode.Parse(responseString);
+
+										if (response["error"] == null)
+										{
+											await DisplayAlert("Node is Watching for UTXOs", "Press 'Next' in DogecoinTerminal", "OK, I selected 'Next'");
+											await Navigation.PopAsync();
+										}
+									}
+									catch (Exception ex)
+									{
+
+										await DisplayAlert("Error Registering with Node", "Select 'Cancel' in DogecoinTerminal.Error:\n" + responseString, "Ok, I selected Cancel");
+										await Navigation.PopAsync();
+									}
+								}
+
+
 							});
 
-							//var client = new DogecoinRpcClient(url, user, pass);
-							//var responseString = client.AddAddressToWatch(parts[2], "qrdoge");
-
-							//// Show a popup with the responseString
-							//await DisplayAlert("Response", responseString, "OK");
 							break;
 						}
 					case "0-update":
@@ -89,11 +110,12 @@ public partial class ScanQRPage : ContentPage
 
 									if(resultString == string.Empty)
 									{
-										await DisplayAlert("No UTXOs", "No UTXOs to provide.", "OK");
+										await DisplayAlert("No Balance Info", "No Balance Info, sorry. :(", "OK");
 										await Navigation.PopAsync();
 									}
 									else
 									{
+										await DisplayAlert("We have Balance Info", "Press 'Next' on DogecoinTerminal, then 'OK' on this message, and then you should get the picture.", "OK");
 										Navigation.InsertPageBefore(new DisplayQRPage(resultString), this);
 										await Navigation.PopAsync();
 									}
@@ -115,8 +137,31 @@ public partial class ScanQRPage : ContentPage
 							{
 								var client = new DogecoinRpcClient(url, user, pass);
 								var responseString = client.BroadcastRawTransaction(parts[2]);
-								await DisplayAlert("Send Transaction Response", responseString, "OK");
-								await Navigation.PopAsync();
+
+								if(responseString.StartsWith("ERROR"))
+								{
+									await DisplayAlert("Error Sending Transaction", "Select 'Cancel' in DogecoinTerminal.Error:\n" + responseString, "Ok, I selected Cancel");
+									await Navigation.PopAsync();
+								}
+								else
+								{
+									try
+									{
+										var response = JsonNode.Parse(responseString);
+
+										if (response["error"] == null)
+										{
+											await DisplayAlert("Transaction Broadcasted", "Press 'Next' in DogecoinTerminal", "OK, I selected 'Next'");
+											await Navigation.PopAsync();
+										}
+									}
+									catch(Exception ex)
+									{
+
+										await DisplayAlert("Error Sending Transaction", "Select 'Cancel' in DogecoinTerminal.Error:\n" + responseString, "Ok, I selected Cancel");
+										await Navigation.PopAsync();
+									}
+								}
 							});
 							break;
 						}

@@ -76,7 +76,7 @@ namespace QRDoge
 			}
 			catch(Exception ex)
 			{
-				return ex.StackTrace + " - " + ex.ToString() + " - " + ex.Message;
+				return "ERROR: "+ex.StackTrace + " - " + ex.ToString() + " - " + ex.Message;
 			};
 		}
 	}
