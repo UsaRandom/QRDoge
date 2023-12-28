@@ -9,12 +9,12 @@ A simple .NET Maui 8 android app for bridging the gap between a [Dogecoin Core N
 
 QRDoge uses the `importaddress`, `listunspent`, `sendrawtransaction` rpc methods to fulfill DogecoinTerminal requests. 
 
-You'll need to enable rpc in a secure fastion and be sure to add your phone to the ip whitelist.
+You'll need to securely enable rpc and be sure to add your phone to the ip whitelist.
 
 
 ## IMPORTANT
 
-QRDoge is currently limited to max qrcode size of ~3k and limited even more so on an average phone's ability to actually read a qr code. It breaks if you try to exceed these limits. 
+QRDoge is currently limited to max qrcode size of ~3k and limited even more so by an average phone's ability to actually read a qr code. It breaks if you try to exceed these limits. 
 
 
 
