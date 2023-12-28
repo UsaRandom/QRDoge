@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="QRDoge.NodeSettingsPage"
+             Title="NodeSettingsPage">
+
+	<VerticalStackLayout Spacing="15" Padding="20">
+
+		<Entry x:Name="RpcUrlEntry" Placeholder="http://192.168.1.69:22555" />
+		<Entry x:Name="RpcUsernameEntry" Placeholder="Username" />
+		<Entry x:Name="RpcPasswordEntry" Placeholder="Password" IsPassword="True" />
+
+		<Button Text="Save Settings" Clicked="OnSaveSettingsClicked" HorizontalOptions="Fill" />
+	</VerticalStackLayout>
+</ContentPage>
